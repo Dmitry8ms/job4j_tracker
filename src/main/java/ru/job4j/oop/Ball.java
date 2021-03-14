@@ -1,7 +1,15 @@
 package ru.job4j.oop;
 
 public class Ball {
-    public boolean eaten = false;
+    private boolean eaten = false;
+
+    public boolean isEaten() {
+        return eaten;
+    }
+
+    public void setEaten(boolean eaten) {
+        this.eaten = eaten;
+    }
 
     public void leaveGrands() { }
 
