@@ -8,12 +8,10 @@ public class Max {
     }
 
     public static int max(int one, int two, int three) {
-        int temp = one >= two ? one : two;
-        return max(temp, three);
+        return max(max(one, two), three);
     }
 
     public static int max(int one, int two, int three, int four) {
-        int temp = max(one, two, three);
-        return max(temp, four);
+        return max(max(one, two, three), four);
     }
 }
