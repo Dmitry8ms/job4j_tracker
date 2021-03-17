@@ -3,11 +3,11 @@ package ru.job4j.oop;
 public class Engineer extends Profession {
     private String company;
 
-    public String getProject() {
+    public String getCompany() {
         return company;
     }
 
-    public void setProject(String project) {
+    public void setCompany(String project) {
         this.company = company;
     }
 
