@@ -12,9 +12,9 @@ public class ShopDrop {
     }
 
     public static void main(String[] args) {
-        Product[] products = new Product[3];
-        products[0] = new Product("Milk", 10);
-        products[1] = null;
+        Product[] products = new Product[5];
+        products[0] = null;
+        products[1] = new Product("Milk", 10);
         products[2] = new Product("Egg", 19);
         for (Product product : products) {
             if (product != null) {

@@ -9,6 +9,16 @@ public class Library {
         System.out.println("_____________________________________________________________");
     }
 
+    public static void printLibrary(Book[] library, String title) {
+        for (int i = 0; i < library.length; i++) {
+            if (library[i].getTitle().equals(title)) {
+                System.out.println("Book: \"" + library[i].getTitle() + "\", pages - "
+                        + library[i].getPages());
+            }
+        }
+        System.out.println("_____________________________________________________________");
+    }
+
     public static void main(String[] args) {
         Book cc = new Book("Clean code", 300);
         Book hf = new Book("Head first, Java", 400);
@@ -19,6 +29,6 @@ public class Library {
         Book tmp = library[0];
         library[0] = library[3];
         library[3] = tmp;
-        printLibrary(library);
+        printLibrary(library, "Clean code");
     }
 }
