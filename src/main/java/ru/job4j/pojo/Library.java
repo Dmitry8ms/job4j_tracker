@@ -1,10 +1,10 @@
 package ru.job4j.pojo;
 
 public class Library {
-    @SuppressWarnings("checkstyle:LineLength")
     public static void printLibrary(Book[] library) {
         for (int i = 0; i < library.length; i++) {
-            System.out.println("Book: \"" + library[i].getTitle() + "\", pages - " + library[i].getPages());
+            System.out.println("Book: \"" + library[i].getTitle() + "\", pages - "
+                                + library[i].getPages());
         }
         System.out.println("_____________________________________________________________");
     }
