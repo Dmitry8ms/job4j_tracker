@@ -60,6 +60,6 @@ public class Tracker {
             items[index] = newItem;
             items[index].setId(id);
         }
-        return index != 0 ? true : false;
+        return index != -1;
     }
 }
