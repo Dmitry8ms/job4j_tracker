@@ -34,15 +34,14 @@ public class Tracker {
         return arrayPick;
     }
 
-    public void removeById(int id) {
-        for (int i = 0; i < size; i++) {
-            if (items[i] != null && items[i].getId() == id) {
-                System.out.println("found and removed Id: " + items[i].getId() + " for product "
-                                    + items[i].getName());
-                items[i] = null;
-                break;
-            }
+    public boolean delete(int id) {
+        int index = indexOf(id);
+        if (index != -1) {
+            System.arraycopy(items, index + 1, items, index, size - index);
+            items[size - 1] = null;
+            size--;
         }
+        return index != 0 ? true : false;
     }
 
     private int indexOf(int id) {

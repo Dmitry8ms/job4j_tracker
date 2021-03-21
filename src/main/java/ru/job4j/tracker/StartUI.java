@@ -25,5 +25,10 @@ public class StartUI {
             System.out.println("found by name: " + it.getName());
         }
         System.out.println("found by Id: " + database.findById(1).getName());
+        System.out.println(database.delete(2));
+        System.out.println();
+        for (Item it : database.findAll()) {
+            System.out.println(it.getName());
+        }
     }
 }
