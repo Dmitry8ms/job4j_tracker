@@ -26,31 +26,23 @@ public class Tracker {
     }
 
     public Item[] findAll() {
-        int realIndex = 0;
-        Item[] arrayCut = new Item[items.length];
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null) {
-                arrayCut[realIndex++] = items[i];
-            }
-        }
-        arrayCut = Arrays.copyOf(arrayCut, realIndex);
-        return arrayCut;
+        return Arrays.copyOf(items, size);
     }
 
     public Item[] findByName(String key) {
-        int realIndex = 0;
-        Item[] arrayCut = findAll();
-        for (int i = 0; i < arrayCut.length; i++) {
-            if (arrayCut[i].getName() == key) {
-                arrayCut[realIndex++] = arrayCut[i];
+        int nameIndex = 0;
+        Item[] arrayPick = findAll();
+        for (int i = 0; i < arrayPick.length; i++) {
+            if (arrayPick[i].getName() == key) {
+                arrayPick[nameIndex++] = arrayPick[i];
             }
         }
-        arrayCut = Arrays.copyOf(arrayCut, realIndex);
-        return arrayCut;
+        arrayPick = Arrays.copyOf(arrayPick, nameIndex);
+        return arrayPick;
     }
 
     public void removeById(int id) {
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i < size; i++) {
             if (items[i] != null && items[i].getId() == id) {
                 System.out.println("found and removed Id: " + items[i].getId() + " for product "
                                     + items[i].getName());

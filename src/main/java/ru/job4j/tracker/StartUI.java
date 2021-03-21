@@ -17,7 +17,6 @@ public class StartUI {
         database.add(item1);
         database.add(item2);
         database.add(item3);
-        database.removeById(2);
         Item[] items = database.findAll();
         for (Item it : items) {
             System.out.println(it.getName());
