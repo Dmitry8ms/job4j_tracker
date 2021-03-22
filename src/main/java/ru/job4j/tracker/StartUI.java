@@ -19,16 +19,15 @@ public class StartUI {
         database.add(item3);
         Item[] items = database.findAll();
         for (Item it : items) {
-            System.out.println(it.getName());
+            System.out.println(it);
         }
         for (Item it : database.findByName("Item #3")) {
-            System.out.println("found by name: " + it.getName());
+            System.out.println("found by name: " + it);
         }
-        System.out.println("found by Id: " + database.findById(1).getName());
-        System.out.println(database.delete(2));
-        System.out.println();
+        System.out.println("found by Id: " + database.findById(1).toString());
+        System.out.println("record deleted - " + database.delete(2));
         for (Item it : database.findAll()) {
-            System.out.println(it.getName());
+            System.out.println(it);
         }
     }
 }
