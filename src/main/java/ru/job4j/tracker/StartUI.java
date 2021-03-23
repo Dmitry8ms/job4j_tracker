@@ -1,33 +1,86 @@
 package ru.job4j.tracker;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class StartUI {
+    public void init(Scanner scanner, Tracker tracker) {
+        boolean run = true;
+        while (run) {
+            showMenu();
+            System.out.print("Select: ");
+            int select = Integer.valueOf(scanner.nextLine());
+            if (select == 0) {
+                System.out.println("=== Create a new Item ====");
+                System.out.print("Enter name: ");
+                String name = scanner.nextLine();
+                Item item = new Item(name);
+                tracker.add(item);
+                System.out.println("Item with name " + name + " is created");
+            } else if (select == 1) {
+                System.out.println("Printing out all items...");
+                for (Item it : tracker.findAll()) {
+                    System.out.println(it);
+                }
+            } else if (select == 2) {
+                System.out.println("Please, enter id of item to edit: ");
+                int id = Integer.valueOf(scanner.nextLine());
+                System.out.println("Please, enter new name of item to edit: ");
+                String name = scanner.nextLine();
+                Item newItem = new Item(name);
+                if (tracker.replace(id, newItem)) {
+                    System.out.println("Item with id " + id + " is replaced with item: " + newItem);
+                } else {
+                    System.out.println("Error - wrong id!");
+                }
+            } else if (select == 3) {
+                System.out.println("Please, enter id of item to delete: ");
+                int id = Integer.valueOf(scanner.nextLine());
+                if (tracker.delete(id)) {
+                    System.out.println("Item with id " + id + " is successfully deleted");
+                } else {
+                    System.out.println("Error - wrong id!");
+                }
+            } else if (select == 4) {
+                System.out.println("Please, enter id of item to find: ");
+                int id = Integer.valueOf(scanner.nextLine());
+                Item foundItem = tracker.findById(id);
+                if (foundItem != null) {
+                    System.out.println("Found item with id " + id + ": " + foundItem);
+                } else {
+                    System.out.println("Error - wrong id!");
+                }
+            } else if (select == 5) {
+                System.out.println("Please, enter name of items to find: ");
+                String name = scanner.nextLine();
+                Item[] items = tracker.findByName(name);
+                if (items.length == 0) {
+                    System.out.println("Found nothing");
+                } else {
+                    for (Item it : items) {
+                        System.out.println(it);
+                    }
+                }
+            } else if (select == 6) {
+                run = false;
+            }
+        }
+    }
+
+    private void showMenu() {
+        System.out.println("Menu.");
+        System.out.println("0. Add new Item");
+        System.out.println("1. Show all items");
+        System.out.println("2. Edit item");
+        System.out.println("3. Delete item");
+        System.out.println("4. Find item by Id");
+        System.out.println("5. Find items by name");
+        System.out.println("6. Exit Program");
+    }
+
     public static void main(String[] args) {
-        Item item1 = new Item();
-        Item item2 = new Item();
-        Item item3 = new Item();
-        item2.setName("Item #2");
-        item3.setName("Item #3");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-        String dateTime = item1.getTime().format(formatter);
-        //System.out.println(dateTime);
-        item1.setName("Item #1");
-        Tracker database = new Tracker();
-        database.add(item1);
-        database.add(item2);
-        database.add(item3);
-        Item[] items = database.findAll();
-        for (Item it : items) {
-            System.out.println(it);
-        }
-        for (Item it : database.findByName("Item #3")) {
-            System.out.println("found by name: " + it);
-        }
-        System.out.println("found by Id: " + database.findById(1).toString());
-        System.out.println("record deleted - " + database.delete(2));
-        for (Item it : database.findAll()) {
-            System.out.println(it);
-        }
+        Scanner scanner = new Scanner(System.in);
+        Tracker tracker = new Tracker();
+        new StartUI().init(scanner, tracker);
     }
 }

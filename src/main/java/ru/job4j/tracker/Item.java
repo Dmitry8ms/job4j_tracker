@@ -9,12 +9,7 @@ public class Item {
     private LocalDateTime created = LocalDateTime.now();
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
 
-    public Item(int id) {
-        this.id = id;
-    }
-
-    public Item(int id, String name) {
-        this.id = id;
+    public Item(String name) {
         this.name = name;
     }
 
