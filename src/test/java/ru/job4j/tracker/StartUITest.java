@@ -62,4 +62,32 @@ public class StartUITest {
         delete.execute(new StubInput(answers), tracker);
         assertThat(tracker.findById(id), is(nullValue()));
     }
+
+    @Test
+    public void whenInitCreateReplaceDeteleItem() {
+        Input in = new StubInput(
+                new String[] {"0", "Item name", "3"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new CreateAction(),
+                new ReplaceAction(),
+                new DeleteAction(),
+                new ExitAction()
+        };
+        StartUI start = new StartUI();
+        start.init(in, tracker, actions);
+        assertThat(tracker.findAll()[0].getName(), is("Item name"));
+        in = new StubInput(
+                new String[] {"1", "1", "Fix PC", "3"}
+        );
+        start.init(in, tracker, actions);
+        assertThat(tracker.findAll()[0].getName(), is("Fix PC"));
+        in = new StubInput(
+                new String[] {"2", "1", "3"}
+        );
+        start.init(in, tracker, actions);
+        assertThat(tracker.findById(1), is(nullValue()));
+    }
+
 }
