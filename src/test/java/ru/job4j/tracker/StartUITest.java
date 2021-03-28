@@ -90,4 +90,34 @@ public class StartUITest {
         assertThat(tracker.findById(1), is(nullValue()));
     }
 
+    @Test
+    public void whenInitAndReplaceItem() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("Replaced item"));
+        String replacedName = "New item name";
+        Input in = new StubInput(
+                new String[] {"0", "1", replacedName, "1"}
+        );
+        UserAction[] actions = {
+                new ReplaceAction(),
+                new ExitAction()
+        };
+        new StartUI().init(in, tracker, actions);
+        assertThat(tracker.findById(item.getId()).getName(), is(replacedName));
+    }
+
+    @Test
+    public void whenInitAndDeleteItem() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("Deleted item"));
+        Input in = new StubInput(
+                new String[] {"0", "1", "1"}
+        );
+        UserAction[] actions = {
+                new DeleteAction(),
+                new ExitAction()
+        };
+        new StartUI().init(in, tracker, actions);
+        assertThat(tracker.findById(item.getId()), is(nullValue()));
+    }
 }
