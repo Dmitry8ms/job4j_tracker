@@ -179,7 +179,6 @@ public class StartUITest {
         };
         new StartUI(console).init(in, tracker, actions);
         String expected = stubout.toString().replace("Found item with id 1: ", "");
-        System.out.println(stubout);
         assertThat(expected.trim(), is(tracker.findById(1).toString()));
     }
 
