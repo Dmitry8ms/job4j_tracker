@@ -130,32 +130,57 @@ public class StartUITest {
 
     @Test
     public void whenInitAndShowAllItems() {
-        Output out = new StubOutput();
+        Output stubout = new StubOutput();
+        Output console = new ConsoleOutput();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Show item"));
         Input in = new StubInput(
                 new String[] {"0", "1"}
         );
         UserAction[] actions = {
-                new ShowAllAction(out),
+                new ShowAllAction(stubout),
                 new ExitAction()
         };
-        new StartUI(out).init(in, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(), is("Show item"));
+        new StartUI(console).init(in, tracker, actions);
+        String expected = stubout.toString().replace("Printing out all items...", "");
+        assertThat(expected.trim(), is(tracker.findAll()[0].toString()));
     }
 
     @Test
     public void whenFindByName() {
+        Output stubout = new StubOutput();
+        Output console = new ConsoleOutput();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Find item"));
+        Input in = new StubInput(
+                new String[] {"0", "Find item", "1"}
+        );
+        UserAction[] actions = {
+                new FindByNameAction(stubout),
+                new ExitAction()
+        };
+        new StartUI(console).init(in, tracker, actions);
         assertThat(tracker.findByName("Find item")[0].getName(), is("Find item"));
+        assertThat(stubout.toString().trim(), is(tracker.findByName("Find item")[0].toString()));
     }
 
     @Test
     public void whenFindById() {
+        Output stubout = new StubOutput();
+        Output console = new ConsoleOutput();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Find item"));
-        assertThat(tracker.findById(1).getName(), is("Find item"));
+        Input in = new StubInput(
+                new String[] {"0", "1", "1"}
+        );
+        UserAction[] actions = {
+                new FindByIdAction(stubout),
+                new ExitAction()
+        };
+        new StartUI(console).init(in, tracker, actions);
+        String expected = stubout.toString().replace("Found item with id 1: ", "");
+        System.out.println(stubout);
+        assertThat(expected.trim(), is(tracker.findById(1).toString()));
     }
 
 }
