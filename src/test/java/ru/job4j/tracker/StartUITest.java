@@ -2,6 +2,8 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.*;
@@ -149,7 +151,6 @@ public class StartUITest {
     @Test
     public void whenFindByName() {
         Output stubout = new StubOutput();
-        Output console = new ConsoleOutput();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Find item"));
         Input in = new StubInput(
@@ -159,15 +160,20 @@ public class StartUITest {
                 new FindByNameAction(stubout),
                 new ExitAction()
         };
-        new StartUI(console).init(in, tracker, actions);
-        assertThat(tracker.findByName("Find item")[0].getName(), is("Find item"));
-        assertThat(stubout.toString().trim(), is(tracker.findByName("Find item")[0].toString()));
+        new StartUI(stubout).init(in, tracker, actions);
+        String expected = "Menu.\r\n"
+                + "0. Find items by name\r\n"
+                + "1. Exit\r\n"
+                + tracker.findByName("Find item")[0].toString() + "\r\n"
+                + "Menu.\r\n"
+                + "0. Find items by name\r\n"
+                + "1. Exit\r\n";
+        assertThat(stubout.toString(), is(expected));
     }
 
     @Test
     public void whenFindById() {
         Output stubout = new StubOutput();
-        Output console = new ConsoleOutput();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Find item"));
         Input in = new StubInput(
@@ -177,9 +183,15 @@ public class StartUITest {
                 new FindByIdAction(stubout),
                 new ExitAction()
         };
-        new StartUI(console).init(in, tracker, actions);
-        String expected = stubout.toString().replace("Found item with id 1: ", "");
-        assertThat(expected.trim(), is(tracker.findById(1).toString()));
+        new StartUI(stubout).init(in, tracker, actions);
+        String expected = "Menu.\r\n"
+                + "0. Find item by Id\r\n"
+                + "1. Exit\r\n"
+                + "Found item with id 1: " + tracker.findById(1).toString() + "\r\n"
+                + "Menu.\r\n"
+                + "0. Find item by Id\r\n"
+                + "1. Exit\r\n";
+        assertThat(stubout.toString(), is(expected));
     }
 
 }
