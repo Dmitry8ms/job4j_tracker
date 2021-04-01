@@ -5,8 +5,7 @@ public class FactRec {
         if (n == 1 || n == 0) {
             return 1;
         }
-        int m = n - 1;
-        return calc(m) * n;
+        return calc(n - 1) * n;
     }
 
     public static void main(String[] args) {
