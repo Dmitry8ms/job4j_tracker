@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 import java.util.Scanner;
 
 public class ValidateInput extends ConsoleInput {
-    private Scanner scanner = new Scanner(System.in);
+    private Output out = getOut();
 
     public ValidateInput(Output out) {
         super(out);
@@ -18,7 +18,7 @@ public class ValidateInput extends ConsoleInput {
                 value = super.askInt(question);
                 invalid = false;
             } catch (NumberFormatException nfe) {
-                System.out.println("Please enter valid data.");
+                out.println("Please enter valid data.");
             }
         } while (invalid);
         return value;
