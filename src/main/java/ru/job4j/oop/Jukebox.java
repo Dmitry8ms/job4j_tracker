@@ -12,6 +12,10 @@ public class Jukebox {
         }
     }
 
+    public String song(int position, String line) {
+        return line + " " + position;
+    }
+
     public static void main(String[] args) {
         Jukebox juke1 = new Jukebox();
         juke1.song(1);
@@ -19,5 +23,6 @@ public class Jukebox {
         juke1.song(lullaby);
         int million = 1000000;
         juke1.song(million);
+        System.out.println(juke1.song(1, "Hello!"));
     }
 }
