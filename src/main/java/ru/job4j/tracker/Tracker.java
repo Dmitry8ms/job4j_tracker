@@ -21,11 +21,10 @@ public class Tracker {
     }
 
     public List<Item> findAll() {
-        return items;
+        return List.copyOf(items);
     }
 
-    public ArrayList<Item> findByName(String key) {
-        int nameIndex = 0;
+    public List<Item> findByName(String key) {
         ArrayList<Item> arrayPick = new ArrayList<>();
         for (Item item : items) {
             if (item.getName().equals(key)) {
@@ -58,8 +57,8 @@ public class Tracker {
         int index = indexOf(id);
         boolean hasSuchId = index != -1;
         if (hasSuchId) {
+            newItem.setId(id);
             items.set(index, newItem);
-            items.get(index).setId(id);
         }
         return hasSuchId;
     }
