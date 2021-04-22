@@ -13,7 +13,7 @@ public class StartUI {
         this.out = out;
     }
 
-    public void init(Input input, Tracker tracker, ArrayList<UserAction> actions) {
+    public void init(Input input, Tracker tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
@@ -27,7 +27,7 @@ public class StartUI {
         }
     }
 
-    private void showMenu(ArrayList<UserAction> actions) {
+    private void showMenu(List<UserAction> actions) {
         out.println("Menu.");
         for (int index = 0; index < actions.size(); index++) {
             out.println(index + ". " + actions.get(index).name());
@@ -38,7 +38,7 @@ public class StartUI {
         Output out = new ConsoleOutput();
         Input input = new ValidateInput(out, new ConsoleInput(out));
         Tracker tracker = new Tracker();
-        ArrayList<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new CreateAction(out), new ShowAllAction(out), new ReplaceAction(out),
                 new DeleteAction(out), new FindByIdAction(out),
                 new FindByNameAction(out), new ExitAction()

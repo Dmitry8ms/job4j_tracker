@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
@@ -77,7 +78,7 @@ public class StartUITest {
                 new String[] {"0", "Item name", "3"}
         );
         Tracker tracker = new Tracker();
-        ArrayList<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new CreateAction(out),
                 new ReplaceAction(out),
                 new DeleteAction(out),
@@ -107,7 +108,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "1", replacedName, "1"}
         );
-        ArrayList<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new ReplaceAction(out),
                 new ExitAction()
         ));
@@ -123,7 +124,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "1", "1"}
         );
-        ArrayList<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new DeleteAction(out),
                 new ExitAction()
         ));
@@ -139,7 +140,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "1"}
         );
-        ArrayList<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new ShowAllAction(stubout),
                 new ExitAction()
         ));
@@ -163,7 +164,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", item.getName(), "1"}
         );
-        ArrayList<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new FindByNameAction(stubout),
                 new ExitAction()
         ));
@@ -186,7 +187,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(item.getId()), "1"}
         );
-        ArrayList<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new FindByIdAction(stubout),
                 new ExitAction()
         ));
@@ -208,7 +209,7 @@ public class StartUITest {
                 new String[] {"1", "0"}
         );
         Tracker tracker = new Tracker();
-        ArrayList<UserAction> actions = new ArrayList<>();
+        List<UserAction> actions = new ArrayList<>();
         actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
