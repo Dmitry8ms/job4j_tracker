@@ -8,8 +8,9 @@ public class UsageMap {
         HashMap<String, String> map = new HashMap<>();
         map.put("parsentev@yandex.ru", "Petr Arsentev");
         map.put("admin@rogaikopyta.org", "Admin");
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            System.out.println("key: " + entry.getKey() + " value: " + entry.getValue());
+        for (String key : map.keySet()) {
+            String value = map.get(key);
+            System.out.println("key: " + key + " value: " + value);
         }
     }
 }
