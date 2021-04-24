@@ -25,4 +25,13 @@ public class PassportOfficeTest {
         Citizen expected = office.get("2f44a");
         assertThat(expected, is(citizen1));
     }
+
+    @Test
+    public void noDuplicate() {
+        Citizen citizen1 = new Citizen("2f44a", "Petr Arsentev");
+        Citizen citizen2 = new Citizen("2f44a", "Petr Ivanov");
+        PassportOffice office = new PassportOffice();
+        office.add(citizen1);
+        assertThat(office.add(citizen2), is(false));
+    }
 }
