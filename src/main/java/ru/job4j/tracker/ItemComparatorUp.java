@@ -6,6 +6,6 @@ public class ItemComparatorUp implements Comparator<Item> {
 
     @Override
     public int compare(Item itemOne, Item itemTwo) {
-        return itemOne.getId() - itemTwo.getId();
+        return Integer.compare(itemOne.getId(), itemTwo.getId());
     }
 }
