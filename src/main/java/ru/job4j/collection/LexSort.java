@@ -12,8 +12,8 @@ public class LexSort implements Comparator<String> {
         String[] numbers1 = number1.split("\\.");
         String[] numbers2 = number2.split("\\.");
         for (int i = 0; i < Math.min(numbers1.length, numbers2.length); i++) {
-            rsl = Integer.compare(Integer.parseInt(numbers1[i])
-                                , Integer.parseInt(numbers2[i]));
+            rsl = Integer.compare(Integer.parseInt(numbers1[i]),
+                                    Integer.parseInt(numbers2[i]));
             if (rsl != 0) {
                 break;
             }
