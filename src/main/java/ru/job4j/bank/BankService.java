@@ -5,13 +5,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Класс содержит основные методы работы с моделями данных Account и User
+ * @author DMITRY SHATOKHIN
+ * @version 1.0
+ */
 public class BankService {
+    /**
+     * Поле users типа HashMap используется для хранения элементов класса
+     * User - ключ, и List<Account> - значение. Значения представляют собой
+     * списки элементов класса Account, т.е. каждому пользователь (User)
+     * соответствует несколько счетов в банке (Account).
+     */
     private Map<User, List<Account>> users = new HashMap<>();
 
+    /**
+     * Метод добавляет пользователя класса {@param user}
+     * в коллекцию users (Map).
+     */
     public void addUser(User user) {
         users.putIfAbsent(user, new ArrayList<>());
     }
 
+    /**
+     * Метод добавляет банковский счет (Account) к списку банковских счетов
+     * пользователя (User) по номеру паспорта пользователя.
+     * @param passport - поле класса User, содержит номер паспорта клиента
+     * @param account - объект класса Account, который надо добавить к списку
+     */
     public void addAccount(String passport, Account account) {
         User found = findByPassport(passport);
         if (found != null) {
@@ -23,6 +44,12 @@ public class BankService {
 
     }
 
+    /**
+     * Метод находит пользователя (User) в коллекции users (Map)
+     * по номеру паспорта.
+     * @param passport - поле класса User, содержащее номер паспорта
+     * @return - метод возвращает найденный экземпляр User
+     */
     public User findByPassport(String passport) {
         for (User u : users.keySet()) {
             if (u.getPassport().equals(passport)) {
@@ -32,6 +59,13 @@ public class BankService {
         return null;
     }
 
+    /**
+     * Метод возвращает {@return Account} по номеру счета {@param requisite}
+     * который является полем класса Account (реквизит счета), и по параметру
+     * @param passport - поле класса User, содержащее номер паспорта
+     *
+     *
+     */
     public Account findByRequisite(String passport, String requisite) {
         User foundUser = this.findByPassport(passport);
         if (foundUser != null) {
@@ -44,6 +78,18 @@ public class BankService {
         return null;
     }
 
+    /**
+     * Метод переводит деньги в размере {@param amount} с одного счета на другой и
+     * возвращет {@return true} если транзакция прошла успешно.
+     * @param srcPassport - поле класса User, содержащее номер паспорта клиента со счета которого
+     *                    переводится {@param amount}
+     * @param srcRequisite - поле класса Account, содержащее номер счета с которого
+     *                       переводятся деньги
+     * @param destPassport - поле класса User, содержащее номер паспорта клиента на счет которому
+     *                       переводится {@param amount}
+     * @param destRequisite - поле класса Account, содержащее номер счета на который
+     *                        переводятся деньги
+     */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         boolean rsl = false;
