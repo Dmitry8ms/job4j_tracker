@@ -29,7 +29,8 @@ public class User {
     }
 
     /**
-     * Сеттер для поля {@param passport}
+     * Сеттер для поля passport
+     * @param passport - строка, содержащая номер паспорта клиента
      */
     public void setPassport(String passport) {
         this.passport = passport;
@@ -44,7 +45,8 @@ public class User {
     }
 
     /**
-     * Сеттер для поля {@param username}
+     * Сеттер для поля username
+     * @param username - строка, содержащая имя клиента
      */
     public void setUsername(String username) {
         this.username = username;

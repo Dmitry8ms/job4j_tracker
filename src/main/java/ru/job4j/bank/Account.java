@@ -23,30 +23,34 @@ public class Account {
     }
 
     /**
-     * Метод позвращает {@return - String} строку
+     * Метод позвращает строку
      * содержащую номер счета
+     * @return String
      */
     public String getRequisite() {
         return requisite;
     }
 
     /**
-     * Метода устанавливает значение {@param requisite} номера счета
+     * Метода устанавливает значение номера счета
+     * @param requisite - номер счета
      */
     public void setRequisite(String requisite) {
         this.requisite = requisite;
     }
 
     /**
-     * Метод возвращает {@return double} число с плавающей точкой,
-     * которое является значением поля balanca.
+     * Метод возвращает  число с плавающей точкой,
+     * которое является значением поля balance
+     * @return double - баланс счета
      */
     public double getBalance() {
         return balance;
     }
 
     /**
-     * Сеттер поля {@param balance}
+     * Сеттер поля  баланс
+     * @param balance - значение для поля balance
      */
     public void setBalance(double balance) {
         this.balance = balance;

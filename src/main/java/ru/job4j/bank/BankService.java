@@ -20,8 +20,9 @@ public class BankService {
     private Map<User, List<Account>> users = new HashMap<>();
 
     /**
-     * Метод добавляет пользователя класса {@param user}
+     * Метод добавляет пользователя класса
      * в коллекцию users (Map).
+     * @param user - параметр принимает объект пользователя User
      */
     public void addUser(User user) {
         users.putIfAbsent(user, new ArrayList<>());
@@ -60,10 +61,12 @@ public class BankService {
     }
 
     /**
-     * Метод возвращает {@return Account} по номеру счета {@param requisite}
-     * который является полем класса Account (реквизит счета), и по параметру
+     * Метод возвращает объект Account по номеру счета
+     * который является полем класса Account (реквизит счета), и по номеру
+     * паспорта
      * @param passport - поле класса User, содержащее номер паспорта
-     *
+     * @param requisite - номер счета (поле класса User)
+     * @return Account - объект класса Account
      *
      */
     public Account findByRequisite(String passport, String requisite) {
@@ -79,16 +82,18 @@ public class BankService {
     }
 
     /**
-     * Метод переводит деньги в размере {@param amount} с одного счета на другой и
-     * возвращет {@return true} если транзакция прошла успешно.
+     * Метод переводит деньги в размере amount с одного счета на другой и
+     * возвращет true если транзакция прошла успешно.
      * @param srcPassport - поле класса User, содержащее номер паспорта клиента со счета которого
-     *                    переводится {@param amount}
+     *                    переводится amount
      * @param srcRequisite - поле класса Account, содержащее номер счета с которого
      *                       переводятся деньги
      * @param destPassport - поле класса User, содержащее номер паспорта клиента на счет которому
-     *                       переводится {@param amount}
+     *                       переводится amount
      * @param destRequisite - поле класса Account, содержащее номер счета на который
      *                        переводятся деньги
+     * @param amount  -  размер переводимой суммы
+     * @return true - если транзакция прошла успешно
      */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
