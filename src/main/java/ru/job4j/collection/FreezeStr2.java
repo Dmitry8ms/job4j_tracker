@@ -1,0 +1,22 @@
+package ru.job4j.collection;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class FreezeStr2 {
+    public static boolean eq(String left, String right) {
+        Map<Character, Integer> leftMap = new HashMap<Character, Integer>();
+        for (char ch : left.toCharArray()) {
+            leftMap.put(ch, countOccurrence(ch, left));
+        }
+        Map<Character, Integer> rightMap = new HashMap<Character, Integer>();
+        for (char ch : right.toCharArray()) {
+            rightMap.put(ch, countOccurrence(ch, right));
+        }
+        return leftMap.equals(rightMap);
+    }
+
+    private static Integer countOccurrence(char ch, String word) {
+        return (word + "\0").split(String.valueOf(ch)).length - 1;
+    }
+}
