@@ -9,11 +9,18 @@ public class FreezeStr2 {
         for (char ch : left.toCharArray()) {
             leftMap.put(ch, countOccurrence(ch, left));
         }
-        Map<Character, Integer> rightMap = new HashMap<Character, Integer>();
         for (char ch : right.toCharArray()) {
-            rightMap.put(ch, countOccurrence(ch, right));
+            if (!leftMap.keySet().contains(ch)) {
+                return false;
+            } else {
+                if (leftMap.get(ch).equals(1)) {
+                    leftMap.remove(ch);
+                } else {
+                    leftMap.put(ch, leftMap.get(ch) - 1);
+                }
+            }
         }
-        return leftMap.equals(rightMap);
+        return leftMap.isEmpty();
     }
 
     private static Integer countOccurrence(char ch, String word) {
