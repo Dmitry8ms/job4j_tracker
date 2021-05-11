@@ -20,7 +20,7 @@ public class BankService {
     private Map<User, List<Account>> users = new HashMap<>();
 
     /**
-     * Метод добавляет пользователя класса
+     * Метод добавляет пользователя класса User
      * в коллекцию users (Map).
      * @param user - параметр принимает объект пользователя User
      */

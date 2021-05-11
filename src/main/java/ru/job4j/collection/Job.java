@@ -1,5 +1,7 @@
 package ru.job4j.collection;
 
+import java.util.*;
+
 public class Job implements Comparable<Job> {
     private String name;
 
@@ -26,5 +28,17 @@ public class Job implements Comparable<Job> {
     @Override
     public int compareTo(Job another) {
         return Integer.compare(priority, another.priority);
+    }
+
+    public static void main(String[] args) {
+        Set<Job> jobSet = new HashSet<>();
+        jobSet.add(new Job("Java developer", 1));
+        jobSet.add(new Job("C# developer", 3));
+        jobSet.add(new Job("Kotlin developer", 2));
+        int size = jobSet.size();
+        for (Job j : jobSet) {
+            System.out.println(j);
+        }
+
     }
 }
