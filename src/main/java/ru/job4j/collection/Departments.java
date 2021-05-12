@@ -20,24 +20,6 @@ public class Departments {
     }
 
     public static void sortDesc(List<String> orgs) {
-        orgs.sort(new DepsDesc().thenComparing(new DepsAsc()));
-    }
-
-    public static class DepsDesc implements Comparator<String> {
-
-        @Override
-        public int compare(String s1, String s2) {
-            s1 = s1.split("/")[0];
-            s2 = s2.split("/")[0];
-            return s2.compareTo(s1);
-        }
-    }
-
-    public static class DepsAsc implements Comparator<String> {
-
-        @Override
-        public int compare(String s1, String s2) {
-            return s1.compareTo(s2);
-        }
+        orgs.sort(new DepsDescComparator());
     }
 }
