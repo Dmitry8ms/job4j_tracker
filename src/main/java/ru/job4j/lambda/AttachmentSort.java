@@ -33,5 +33,7 @@ public class AttachmentSort {
                 return a2.getName().compareTo(a1.getName());
             }
         };
+        attachments.sort(compNamesDesc);
+        System.out.println(attachments);
     }
 }
