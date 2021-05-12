@@ -7,7 +7,8 @@ public class FreezeStr2 {
     public static boolean eq(String left, String right) {
         Map<Character, Integer> leftMap = new HashMap<Character, Integer>();
         for (char ch : left.toCharArray()) {
-            leftMap.put(ch, countOccurrence(ch, left));
+            leftMap.putIfAbsent(ch, 0);
+            leftMap.computeIfPresent(ch, (key, val) -> val + 1);
         }
         for (char ch : right.toCharArray()) {
             if (!leftMap.keySet().contains(ch)) {
@@ -21,9 +22,5 @@ public class FreezeStr2 {
             }
         }
         return leftMap.isEmpty();
-    }
-
-    private static Integer countOccurrence(char ch, String word) {
-        return (word + "\0").split(String.valueOf(ch)).length - 1;
     }
 }
