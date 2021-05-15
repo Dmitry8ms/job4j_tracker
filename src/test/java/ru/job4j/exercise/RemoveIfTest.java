@@ -1,6 +1,7 @@
-package ru.job4j.exercise.list;
+package ru.job4j.exercise;
 
 import org.junit.Test;
+import ru.job4j.exercise.list.RemoveIf;
 
 import java.util.ArrayList;
 import java.util.List;
