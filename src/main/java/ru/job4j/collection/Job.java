@@ -31,14 +31,25 @@ public class Job implements Comparable<Job> {
     }
 
     public static void main(String[] args) {
-        Set<Job> jobSet = new HashSet<>();
+        List<Job> jobSet = new ArrayList<>();
         jobSet.add(new Job("Java developer", 1));
         jobSet.add(new Job("C# developer", 3));
         jobSet.add(new Job("Kotlin developer", 2));
-        int size = jobSet.size();
+        Comparator<Job> nameDesc = (n1, n2) -> n2.getName().compareTo(n1.getName());
+        Comparator<Job> nameLenDesc = (n1, n2) -> Integer.compare(n2.getName().length(),
+                                                n1.getName().length());
         for (Job j : jobSet) {
             System.out.println(j);
         }
-
+        System.out.println();
+        jobSet.sort(nameDesc);
+        for (Job j : jobSet) {
+            System.out.println(j);
+        }
+        System.out.println();
+        jobSet.sort(nameLenDesc);
+        for (Job j : jobSet) {
+            System.out.println(j);
+        }
     }
 }
