@@ -18,6 +18,6 @@ public class Pangram {
         for (char c : letters) {
             setLet.add(c);
         }
-        return setLet.size() == 26 ? true : false;
+        return setLet.size() == 26;
     }
 }
