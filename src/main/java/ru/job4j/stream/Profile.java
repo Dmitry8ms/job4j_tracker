@@ -8,7 +8,7 @@ public class Profile {
 
     private Profile() { }
 
-    public static Profile makeProfile(Address adrs) {
+    public static Profile of(Address adrs) {
         Profile pr = new Profile();
         pr.address = adrs;
         return pr;

@@ -12,12 +12,12 @@ public class ProfilesTest {
 
     @Test
     public void collectAdrFromProfs() {
-        Address adr1 = Address.makeAddress("Moscow", "Kutuzov str.",
+        Address adr1 = Address.of("Moscow", "Kutuzov str.",
                                         130, 10);
-        Address adr2 = Address.makeAddress("St. Petersburg", "Gorohovaya str.",
+        Address adr2 = Address.of("St. Petersburg", "Gorohovaya str.",
                                         43, 5);
-        Profile pr1 = Profile.makeProfile(adr1);
-        Profile pr2 = Profile.makeProfile(adr2);
+        Profile pr1 = Profile.of(adr1);
+        Profile pr2 = Profile.of(adr2);
         List<Profile> prs = List.of(pr1, pr2);
         List<Address> expected = new ArrayList<>();
         expected.add(adr1);

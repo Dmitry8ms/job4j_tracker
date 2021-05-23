@@ -10,7 +10,7 @@ public class Address {
 
     private Address() { }
 
-    public static Address makeAddress(String city, String street, int home, int apartment) {
+    public static Address of(String city, String street, int home, int apartment) {
         Address adr = new Address();
         adr.city = city;
         adr.street = street;
