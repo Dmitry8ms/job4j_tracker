@@ -9,4 +9,12 @@ public class Profiles {
                 .map(Profile::getAddress)
                 .collect(Collectors.toList());
     }
+
+    public List<Address> cutDups(List<Profile> profiles) {
+        List<Address> adrs = collect(profiles);
+        return adrs.stream()
+                .sorted((a, b) -> a.getCity().compareTo(b.getCity()))
+                .distinct()
+                .collect(Collectors.toList());
+    }
 }
