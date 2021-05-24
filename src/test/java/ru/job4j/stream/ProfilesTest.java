@@ -41,7 +41,7 @@ public class ProfilesTest {
         List<Address> expected = new ArrayList<>();
         expected.add(adr1);
         expected.add(adr2);
-        Collections.sort(expected, (left, right) -> left.getCity().compareTo(right.getCity()));
+        expected.sort(Comparator.comparing(Address::getCity));
         assertThat(new Profiles().cutDups(prs), is(expected));
     }
 }
