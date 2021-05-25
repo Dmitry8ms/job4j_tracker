@@ -20,7 +20,7 @@ public class Weather {
             int rain = i.getRainfall();
             infoMap.computeIfPresent(city, (k, v) -> v + rain);
             infoMap.putIfAbsent(city, rain);*/
-            infoMap.merge(i.getCity(), i.getRainfall(), (v1, v2) -> v1 + v2);
+            infoMap.merge(i.getCity(), i.getRainfall(), Integer::sum);
         }
         System.out.println(infoMap);
         for (String key : infoMap.keySet()) {
