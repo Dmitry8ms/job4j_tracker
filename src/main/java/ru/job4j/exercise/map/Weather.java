@@ -16,11 +16,11 @@ public class Weather {
         List<Info> rsl = new ArrayList<>();
         Map<String, Integer> infoMap = new HashMap<>();
         for (Info i : list) {
-            String city = i.getCity();
+            /* String city = i.getCity();
             int rain = i.getRainfall();
             infoMap.computeIfPresent(city, (k, v) -> v + rain);
-            infoMap.putIfAbsent(city, rain);
-            //infoMap.merge(i.getCity(), i.getRainfall(), (v1, v2) -> v1 + v2);
+            infoMap.putIfAbsent(city, rain);*/
+            infoMap.merge(i.getCity(), i.getRainfall(), (v1, v2) -> v1 + v2);
         }
         System.out.println(infoMap);
         for (String key : infoMap.keySet()) {
