@@ -17,10 +17,11 @@ import java.util.stream.Collectors;
 public class ConvertListToMap {
 
     public Map<String, Student> listToMap(List<Student> studentList) {
-        return studentList.stream()
+        Map<String, Student> studentMap = studentList.stream()
                 .distinct()
-                .collect(Collectors.toMap(Student::getSurname,
+                .collect(Collectors.toMap(student -> student.getSurname(),
                                             student -> student));
+        return studentMap;
     }
 
     public static void main(String[] args) {
