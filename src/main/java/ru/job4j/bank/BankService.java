@@ -52,12 +52,15 @@ public class BankService {
      * @return - метод возвращает найденный экземпляр User
      */
     public User findByPassport(String passport) {
-        for (User u : users.keySet()) {
+       /* for (User u : users.keySet()) {
             if (u.getPassport().equals(passport)) {
                 return u;
             }
-        }
-        return null;
+        }*/
+        return users.keySet().stream()
+                    .filter(e -> e.getPassport().equals(passport))
+                    .findFirst()
+                    .orElse(null);
     }
 
     /**
@@ -72,11 +75,15 @@ public class BankService {
     public Account findByRequisite(String passport, String requisite) {
         User foundUser = this.findByPassport(passport);
         if (foundUser != null) {
-            for (Account account : users.get(foundUser)) {
+           /* for (Account account : users.get(foundUser)) {
                 if (account.getRequisite().equals(requisite)) {
                     return account;
                 }
-            }
+            }*/
+            return users.get(foundUser).stream()
+                                        .filter(e -> e.getRequisite().equals(requisite))
+                                        .findFirst()
+                                        .orElse(null);
         }
         return null;
     }
@@ -124,9 +131,12 @@ public class BankService {
         bs.addAccount("7777 007007", new Account("1234567890", 100000.00));
         bs.addUser(new User("1111 111111", "Stas Korobeynikov"));
         bs.addAccount("1111 111111", new Account("9087654321", 10000.00));
+        System.out.println("Client - " + bs.findByPassport("1111 111111").getUsername()
+        + " amount - " + bs.findByRequisite("1111 111111", "9087654321")
+                .getBalance());
         bs.transferMoney("7777 007007", "1234567890", "1111 111111",
                     "9087654321", 50000.00);
         Account account = bs.findByRequisite("1111 111111", "9087654321");
-        System.out.println(account.getBalance());
+        System.out.println("account after transfer - " + account.getBalance());
     }
 }
