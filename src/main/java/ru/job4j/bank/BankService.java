@@ -1,9 +1,6 @@
 package ru.job4j.bank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Класс содержит основные методы работы с моделями данных Account и User
@@ -35,9 +32,9 @@ public class BankService {
      * @param account - объект класса Account, который надо добавить к списку
      */
     public void addAccount(String passport, Account account) {
-        User found = findByPassport(passport);
-        if (found != null) {
-            List<Account> accounts = users.get(found);
+        Optional<User> found = findByPassport(passport);
+        if (found.isPresent()) {
+            List<Account> accounts = users.get(found.get());
             if (!accounts.contains(account)) {
                 accounts.add(account);
             }
@@ -51,7 +48,7 @@ public class BankService {
      * @param passport - поле класса User, содержащее номер паспорта
      * @return - метод возвращает найденный экземпляр User
      */
-    public User findByPassport(String passport) {
+    public Optional<User> findByPassport(String passport) {
        /* for (User u : users.keySet()) {
             if (u.getPassport().equals(passport)) {
                 return u;
@@ -59,8 +56,7 @@ public class BankService {
         }*/
         return users.keySet().stream()
                     .filter(e -> e.getPassport().equals(passport))
-                    .findFirst()
-                    .orElse(null);
+                    .findFirst();
     }
 
     /**
@@ -72,18 +68,17 @@ public class BankService {
      * @return Account - объект класса Account
      *
      */
-    public Account findByRequisite(String passport, String requisite) {
-        User foundUser = this.findByPassport(passport);
-        if (foundUser != null) {
+    public Optional<Account> findByRequisite(String passport, String requisite) {
+        Optional<User> foundUser = this.findByPassport(passport);
+        if (foundUser.isPresent()) {
            /* for (Account account : users.get(foundUser)) {
                 if (account.getRequisite().equals(requisite)) {
                     return account;
                 }
             }*/
-            return users.get(foundUser).stream()
+            return users.get(foundUser.get()).stream()
                                         .filter(e -> e.getRequisite().equals(requisite))
-                                        .findFirst()
-                                        .orElse(null);
+                                        .findFirst();
         }
         return null;
     }
@@ -105,14 +100,14 @@ public class BankService {
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         boolean rsl = false;
-        Account srcAccount = findByRequisite(srcPassport, srcRequisite);
-        Account destAccount = findByRequisite(destPassport, destRequisite);
-        if (srcAccount != null && destAccount != null) {
-            double srcBalance = srcAccount.getBalance();
+        Optional<Account> srcAccount = findByRequisite(srcPassport, srcRequisite);
+        Optional<Account> destAccount = findByRequisite(destPassport, destRequisite);
+        if (srcAccount.isPresent() && destAccount.isPresent()) {
+            double srcBalance = srcAccount.get().getBalance();
             if (srcBalance - amount >= 0) {
-                double destBalance = destAccount.getBalance();
-                srcAccount.setBalance(srcBalance - amount);
-                destAccount.setBalance(destBalance + amount);
+                double destBalance = destAccount.get().getBalance();
+                srcAccount.get().setBalance(srcBalance - amount);
+                destAccount.get().setBalance(destBalance + amount);
                 rsl = true;
             }
         }
@@ -131,12 +126,12 @@ public class BankService {
         bs.addAccount("7777 007007", new Account("1234567890", 100000.00));
         bs.addUser(new User("1111 111111", "Stas Korobeynikov"));
         bs.addAccount("1111 111111", new Account("9087654321", 10000.00));
-        System.out.println("Client - " + bs.findByPassport("1111 111111").getUsername()
+        System.out.println("Client - " + bs.findByPassport("1111 111111").get().getUsername()
         + " amount - " + bs.findByRequisite("1111 111111", "9087654321")
-                .getBalance());
+                .get().getBalance());
         bs.transferMoney("7777 007007", "1234567890", "1111 111111",
                     "9087654321", 50000.00);
-        Account account = bs.findByRequisite("1111 111111", "9087654321");
-        System.out.println("account after transfer - " + account.getBalance());
+        Optional<Account> account = bs.findByRequisite("1111 111111", "9087654321");
+        System.out.println("account after transfer - " + account.get().getBalance());
     }
 }
