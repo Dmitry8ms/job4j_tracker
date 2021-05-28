@@ -53,12 +53,22 @@ public class BankService {
             if (u.getPassport().equals(passport)) {
                 return u;
             }
-        }*/
+        } */
         return users.keySet().stream()
                     .filter(e -> e.getPassport().equals(passport))
                     .findFirst();
     }
 
+   /* public Optional<User> findByPassport(String passport) {
+        Optional<User> rsl = Optional.empty();
+        for (User user : users.keySet()) {
+            if (user.getPassport().equals(passport)) {
+                rsl = Optional.of(user);
+                break;
+            }
+        }
+        return rsl;
+    }*/
     /**
      * Метод возвращает объект Account по номеру счета
      * который является полем класса Account (реквизит счета), и по номеру
@@ -68,6 +78,7 @@ public class BankService {
      * @return Account - объект класса Account
      *
      */
+
     public Optional<Account> findByRequisite(String passport, String requisite) {
         Optional<User> foundUser = this.findByPassport(passport);
         if (foundUser.isPresent()) {
