@@ -10,7 +10,7 @@ import java.util.stream.Collector;
 public class CollectorClass {
     public static List<Integer> collect(List<Integer> list) {
         Supplier<List<Integer>> supplier = ArrayList::new;
-        BiConsumer<List<Integer>, Integer> biConsumer = (l, n) -> l.add(n);
+        BiConsumer<List<Integer>, Integer> biConsumer = List::add;
         BinaryOperator<List<Integer>> operator = (left, right) -> {
             left.addAll(right);
             return left;
