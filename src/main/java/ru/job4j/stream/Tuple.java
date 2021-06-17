@@ -6,17 +6,17 @@ public class Tuple {
     private String name;
     private double score;
 
+    public Tuple(String name, double score) {
+        this.name = name;
+        this.score = score;
+    }
+
     @Override
     public String toString() {
         return "Tuple{"
                 + "name='" + name + '\''
                 + ", score=" + score
                 + '}';
-    }
-
-    public Tuple(String name, double score) {
-        this.name = name;
-        this.score = score;
     }
 
     @Override

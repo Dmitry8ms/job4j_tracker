@@ -5,6 +5,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/* В этом задании необходимо реализовать класс для подсчета статистики по аттестатам учеников.
+ Метод averageScore вычисляет общий средний балл.
+
+Метод averageScoreBySubject вычисляет средний балл ученика по его предметам.
+Возвращает список из объекта Tuple (имя ученика и средний балл).
+
+Метод averageScoreByPupil вычисляет средний балл по всем предметам для каждого ученика.
+Возвращает список из объекта Tuple (название предмета и средний балл).
+
+Метод bestStudent - возвращает лучшего ученика. Лучшим считается ученик с наибольшим баллом по
+ всем предметам.
+
+Метод bestSubject - возвращает предмет с наибольшим баллом для всех студентов.
+Возвращает объект Tuple (имя предмета, сумма баллов каждого ученика по этому предмету) */
+
 public class Analyze {
     public static double averageScore(Stream<Pupil> stream) {
         return stream.flatMap(p -> p.getSubjects().stream())
