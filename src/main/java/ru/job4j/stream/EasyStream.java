@@ -44,6 +44,7 @@ public class EasyStream {
 
     public List<Integer> collect() {
         //throw new UnsupportedOperationException();
-        return sourceList;
+        List<Integer> copyList = sourceList;
+        return copyList;
     }
 }
