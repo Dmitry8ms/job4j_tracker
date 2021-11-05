@@ -3,8 +3,8 @@ package ru.job4j.collection;
 import java.util.HashMap;
 import java.util.Map;
 
-//Даны две строки. Нужно проверить, что вторая строка получилась методом
-// перестановок символов в первой строке.
+/**Даны две строки. Нужно проверить, что вторая строка получилась методом
+ перестановок символов в первой строке.*/
 
 public class FreezeStr2 {
     public static boolean eq(String left, String right) {

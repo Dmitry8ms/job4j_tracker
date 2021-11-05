@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-/* 1. Создайте анонимный класс для компаратора Attachment. Класс должен
+/** 1. Создайте анонимный класс для компаратора Attachment. Класс должен
 сравнивать имена объектов Attachment.
 2. Добавьте код из пункта 1 в конструкцию, приведенную ниже. */
 

@@ -2,7 +2,7 @@ package ru.job4j.exercise.map;
 
 import java.util.*;
 
-/* Метод принимает список объектов Info. При это эти объекты содержат два поля:
+/** Метод принимает список объектов Info. При это эти объекты содержат два поля:
 
 1. city - название города, где производились наблюдения;
 
@@ -16,10 +16,6 @@ public class Weather {
         List<Info> rsl = new ArrayList<>();
         Map<String, Integer> infoMap = new HashMap<>();
         for (Info i : list) {
-            /* String city = i.getCity();
-            int rain = i.getRainfall();
-            infoMap.computeIfPresent(city, (k, v) -> v + rain);
-            infoMap.putIfAbsent(city, rain);*/
             infoMap.merge(i.getCity(), i.getRainfall(), Integer::sum);
         }
         System.out.println(infoMap);
