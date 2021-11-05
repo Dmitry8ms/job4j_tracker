@@ -26,9 +26,7 @@ public class WeatherTest {
                 new Weather.Info("Brest", 40)
         );
         List<Weather.Info> rsl = Weather.editData(list);
-        //List<Weather.Info> expected = List.of(
 
-        //);
         assertThat(rsl, containsInAnyOrder(new Weather.Info("Gomel", 81),
                 new Weather.Info("Vitebsk", 54),
                 new Weather.Info("Brest", 63),
