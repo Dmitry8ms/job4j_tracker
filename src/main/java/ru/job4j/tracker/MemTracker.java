@@ -4,25 +4,34 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Tracker {
+public class MemTracker implements Store {
     private final List<Item> items = new ArrayList<>();
     private int ids = 1;
 
+    @Override
+    public void init() {
+
+    }
+
+    @Override
     public Item add(Item item) {
         item.setId(ids++);
         items.add(item);
         return item;
     }
 
+    @Override
     public Item findById(int id) {
         int index = indexOf(id);
         return index == -1 ? null : items.get(index);
     }
 
+    @Override
     public List<Item> findAll() {
         return List.copyOf(items);
     }
 
+    @Override
     public List<Item> findByName(String key) {
         ArrayList<Item> arrayPick = new ArrayList<>();
         for (Item item : items) {
@@ -33,6 +42,7 @@ public class Tracker {
         return arrayPick;
     }
 
+    @Override
     public boolean delete(int id) {
         int index = indexOf(id);
         boolean hasSuchId = index != -1;
@@ -52,6 +62,7 @@ public class Tracker {
         return index;
     }
 
+    @Override
     public boolean replace(int id, Item newItem) {
         int index = indexOf(id);
         boolean hasSuchId = index != -1;
@@ -60,5 +71,10 @@ public class Tracker {
             items.set(index, newItem);
         }
         return hasSuchId;
+    }
+
+    @Override
+    public void close() throws Exception {
+
     }
 }

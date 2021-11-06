@@ -17,7 +17,7 @@ public class StartUITest {
         Output out = new StubOutput();
         String[] answers = {"Fix PC"};
         Input input = new StubInput(answers);
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         UserAction create = new CreateAction(out);
         create.execute(input, tracker);
         Item created = tracker.findAll().get(0);
@@ -30,7 +30,7 @@ public class StartUITest {
         Output out = new StubOutput();
         String[] answers = {"Fix PC"};
         Input input = new StubInput(answers);
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         UserAction create = new CreateAction(out);
         create.execute(input, tracker);
         answers = new String[]{"1", "Fix notebook"};
@@ -45,7 +45,7 @@ public class StartUITest {
     @Test
     public void whenReplaceItem() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = new Item("new item");
         tracker.add(item);
         String[] answers = {
@@ -61,7 +61,7 @@ public class StartUITest {
     @Test
     public void whenDeleteItem() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = new Item("new item");
         tracker.add(item);
         int id = item.getId();
@@ -77,7 +77,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "Item name", "3"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new CreateAction(out),
                 new ReplaceAction(out),
@@ -102,7 +102,7 @@ public class StartUITest {
     @Test
     public void whenInitAndReplaceItem() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "New item name";
         Input in = new StubInput(
@@ -119,7 +119,7 @@ public class StartUITest {
     @Test
     public void whenInitAndDeleteItem() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Deleted item"));
         Input in = new StubInput(
                 new String[] {"0", "1", "1"}
@@ -135,7 +135,7 @@ public class StartUITest {
     @Test
     public void whenInitAndShowAllItems() {
         Output stubout = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Show item"));
         Input in = new StubInput(
                 new String[] {"0", "1"}
@@ -159,7 +159,7 @@ public class StartUITest {
     @Test
     public void whenFindByName() {
         Output stubout = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Find item"));
         Input in = new StubInput(
                 new String[] {"0", item.getName(), "1"}
@@ -182,7 +182,7 @@ public class StartUITest {
     @Test
     public void whenFindById() {
         Output stubout = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Find item"));
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(item.getId()), "1"}
@@ -208,7 +208,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"1", "0"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = new ArrayList<>();
         actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);

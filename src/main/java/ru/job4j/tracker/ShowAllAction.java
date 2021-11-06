@@ -13,7 +13,7 @@ public class ShowAllAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         out.println("Printing out all items...");
         for (Item it : tracker.findAll()) {
             out.println(it);
