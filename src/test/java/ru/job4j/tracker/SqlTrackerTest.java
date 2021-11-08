@@ -16,7 +16,7 @@ import java.util.Properties;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class SqlTrackerTest {
 
@@ -58,6 +58,51 @@ public class SqlTrackerTest {
         Item item = new Item("item");
         tracker.add(item);
         assertThat(tracker.findById(item.getId()), is(item));
+    }
+
+    @Test
+    public void whenReplaceItemAndFindByIdNameMustBeChanged() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = tracker.add(new Item("item"));
+        tracker.replace(item.getId(), new Item("item changed"));
+        assertThat(tracker.findById(item.getId()).getName(), is("item changed"));
+    }
+
+    @Test
+    public void whenReplaceItemAndFindByIdTimeStampMustBeChanged() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = tracker.add(new Item("item"));
+        tracker.replace(item.getId(), new Item("item changed"));
+        assertFalse(tracker.findById(item.getId()).getTime().equals(item.getTime()));
+    }
+
+    @Test
+    public void whenDeleteItemAndFindAllReturnListMustBeEmpty() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = tracker.add(new Item("item"));
+        tracker.delete(item.getId());
+        assertTrue(tracker.findAll().isEmpty());
+    }
+
+    @Test
+    public void whenAddItemAndFindAllListMustContainSameItem() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = tracker.add(new Item("item"));
+        assertThat(tracker.findAll().get(0), is(item));
+    }
+
+    @Test
+    public void whenFindByNameIdMustBeSame() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = tracker.add(new Item("item"));
+        assertThat(tracker.findByName(item.getName()).get(0).getId(), is(item.getId()));
+    }
+
+    @Test
+    public void whenAddReturnItemMustBeSameAsAdded() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        assertThat(tracker.add(item), is(item));
     }
 
 }
